@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 
 // const requestLogger = (req, res, next) => {
@@ -9,9 +10,10 @@ const app = express();
 //   console.log("-----");
 //   next();
 // };
+// app.use(requestLogger);
 
 app.use(express.json());
-// app.use(requestLogger);
+app.use(cors());
 morgan.token("body", (req) => JSON.stringify(req.body));
 const tinyMorganWithBody =
   ":method :url :status :res[content-length] - :response-time ms :body";
