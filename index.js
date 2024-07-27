@@ -23,9 +23,9 @@ const tinyMorganWithBody =
 
 app.use(morgan(tinyMorganWithBody));
 
-const generateId = () => {
-  return Math.floor(Math.random() * 1000000000);
-};
+// const generateId = () => {
+//   return Math.floor(Math.random() * 1000000000);
+// };
 
 app.post("/api/persons", (req, res, next) => {
   const body = req.body;

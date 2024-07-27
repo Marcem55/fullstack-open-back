@@ -20,6 +20,19 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
+const createPerson = () => {
+  const name = process.argv[3];
+  const number = process.argv[4];
+  const person = new Person({
+    name,
+    number,
+  });
+  person.save().then((res) => {
+    console.log(`Added ${name}, number ${number} to phonebook`, res);
+    mongoose.connection.close();
+  });
+};
+
 switch (process.argv.length) {
   case 3:
     Person.find({}).then((result) => {
@@ -35,16 +48,7 @@ switch (process.argv.length) {
     process.exit(1);
     break;
   case 5:
-    let name = process.argv[3];
-    let number = process.argv[4];
-    let person = new Person({
-      name,
-      number,
-    });
-    person.save().then((res) => {
-      console.log(`Added ${name}, number ${number} to phonebook`);
-      mongoose.connection.close();
-    });
+    createPerson();
     break;
   default:
     console.log(`Args length: ${process.argv.length}`);
